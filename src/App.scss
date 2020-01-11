@@ -1,9 +1,31 @@
+$blue: #3b84b9;
+$yellow: #ffd796;
+$font: 'Catamaran', serif;
 
 
+
+@import url('https://fonts.googleapis.com/css?family=Crete+Round|Catamaran|Noto+Sans+JP&display=swap');
+
+
+body {
+  font-family: $font !important;
+}
 .dashboard_main{
   background-color: white;
 }
 
 .nav_bg {
-  background-color: #3b84b9;
+  background-color: $blue;
+}
+
+.header {
+  color : white;
+  height : 6rem;
+
+}
+
+.MuiTableCell-root {
+  font-family: $font !important;
+  font-size : 1rem !important;
+
 }

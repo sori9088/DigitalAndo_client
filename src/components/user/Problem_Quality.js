@@ -100,7 +100,7 @@ export default function Problem_Quality() {
     console.log('line', line)
     return (
       <Container className="mt-5">
-       <h1> Quality problem</h1>
+       <h1> Quality Issue</h1>
        <br/>
 
       
@@ -124,6 +124,7 @@ export default function Problem_Quality() {
           <MenuItem value="A5">A5</MenuItem>
         </Select>
       </FormControl>
+    <br/>
     <br/>
        <h5> Model </h5>
       <Autocomplete
@@ -151,7 +152,8 @@ export default function Problem_Quality() {
         )}
       />
     <br/>
-    <h5> Remark </h5>
+    
+    <h5> Let us know more about issue detail </h5>
     <textarea onChange={(e)=> handleChange(e)} style={{width:"100%", height:"200px"}} name="remark"> </textarea> <br/>
     <Button onClick={handleSubmit} variant="info">Submit</Button>
 

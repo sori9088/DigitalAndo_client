@@ -16,7 +16,7 @@ function App() {
         <Route exact path='/dashboard' render={() => <Dashboard />} />
         <Route exact path='/detail/machine' render={() => <Problem_Machine />} />
         <Route exact path='/detail/materials' render={() => <Problem_Materials />} />
-        <Route exact path='/quality' render={() => <Problem_Quality />} />
+        <Route exact path='/detail/quality' render={() => <Problem_Quality />} />
         <Route exact path='/detail/technical' render={() => <Problem_Technical />} />
         {/* <Route exact path='/detail/:id' render={() => <Problem_... />} /> */}
     </Switch>

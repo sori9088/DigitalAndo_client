@@ -6,7 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from 'react-bootstrap/Button'
+import {Button, Container} from 'react-bootstrap'
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -43,7 +43,7 @@ export default function Problem_Quality() {
       ];
 
     return (
-      <>
+      <Container className="mt-5">
        <h1> Quality problem</h1>
        <br/>
        <div>
@@ -90,8 +90,10 @@ export default function Problem_Quality() {
         )}
       />
     <br/>
+    <h5> Comment </h5>
+    <textarea style={{width:"100%", height:"200px"}}> </textarea> <br/>
     <Button variant="info">Submit</Button>
-      </>
+      </Container>
     );
   }
   

@@ -13,14 +13,12 @@ function App() {
   return (
     <>
     <Switch>
-        <Route exact path='/' render={() => <Main />} />
-        <Route exact path='/home' render={() => <Home />} />
+        <Route exact path='/' render={() => <Home />} />
         <Route exact path='/dashboard' render={() => <Dashboard />} />
         <Route exact path='/detail/machine' render={() => <Problem_Machine />} />
         <Route exact path='/detail/materials' render={() => <Problem_Materials />} />
         <Route exact path='/detail/quality' render={() => <Problem_Quality />} />
         <Route exact path='/detail/technical' render={() => <Problem_Technical />} />
-        {/* <Route exact path='/detail/:id' render={() => <Problem_... />} /> */}
     </Switch>
     </>
   );

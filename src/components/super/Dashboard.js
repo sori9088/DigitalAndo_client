@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -18,14 +19,6 @@ const StyledTableCell = withStyles(theme => ({
         fontSize: 14,
     },
 }))(TableCell);
-
-const StyledTableRow = withStyles(theme => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
-        },
-    },
-}))(TableRow);
 
 
 
@@ -42,6 +35,8 @@ export default function Dashboard() {
     const [info, setInfo] = useState(null)
     const [dataRows, setDataRows] = useState([])
     const [filteredInfo, setFilteredInfo] = useState(null)
+    const [toggle1, setToggle1] = useState(false)
+    const [toggle2, setToggle2] = useState(false)
 
 
     useEffect(() => {
@@ -51,7 +46,12 @@ export default function Dashboard() {
 
     useEffect(() => {
         reload();
-    }, [info])
+    }, [filteredInfo])
+
+
+    useEffect(() => {
+        reload();
+    }, [filteredInfo])
 
 
 
@@ -68,7 +68,91 @@ export default function Dashboard() {
 
     }
 
-    console.log(info)
+    console.log(filteredInfo)
+
+    function createData(id, Line, Detail1, Detail2, Problem, Status, Start, Remark) {
+        return { id, Line, Detail1, Detail2, Problem, Status, Start, Remark };
+    }
+
+    const reload = async () => {
+        const rows = [];
+        filteredInfo && filteredInfo.map((item) => {
+            rows.push(createData(item.id, item.line_id, item.detail1, item.detail2, item.issue_type, item.status, item.start_date, item.remark));
+        });
+        setDataRows(rows)
+
+    }
+
+    console.log(dataRows)
+
+
+
+    const changetoDoing = async (e, id) => {
+        e.preventDefault();
+        const res = await fetch(process.env.REACT_APP_BURL + "/doing", {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({ "id": id })
+        });
+
+
+        if (res.ok) { // user is logged in
+            const data = await res.json()  // carefull you might be stuck here bcos of "await"
+            setInfo(data.issues)
+        } else {
+            alert('something is wrong')
+        }
+        console.log('hihi')
+    }
+
+    const finish = async (e, id) => {
+        e.preventDefault();
+        const res = await fetch(process.env.REACT_APP_BURL + "/done", {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({ "id": id })
+        });
+
+
+        if (res.ok) { // user is logged in
+            const data = await res.json()  // carefull you might be stuck here bcos of "await"
+            setInfo(data.issues)
+        } else {
+            alert('something is wrong')
+        }
+        console.log('hihi')
+    }
+
+
+    const toggleWaiting = (e) => {
+        e.preventDefault()
+        if (toggle1 == false) {
+            const newIssues = info && info.filter((issue) => issue.status === "null")
+            setFilteredInfo(newIssues)
+        }
+        else {
+            setFilteredInfo(info)
+        }
+    }
+
+    const toggleDone = (e) => {
+        e.preventDefault()
+        if (toggle2 == false) {
+            const newIssues = info && info.filter((issue) => issue.status === "doing")
+            setFilteredInfo(newIssues)
+        }
+        else {
+            setFilteredInfo(info)
+
+        }
+    }
+
+
+
 
     function createData(id, Line, Detail1, Detail2, Problem, Status, Start, Remark) {
         return { id, Line, Detail1, Detail2, Problem, Status, Start, Remark };

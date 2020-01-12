@@ -4,7 +4,8 @@ $font: 'Catamaran', serif;
 
 
 
-@import url('https://fonts.googleapis.com/css?family=Crete+Round|Catamaran|Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Crete+Round|Catamaran|Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Delius+Unicase:700|Mali:700|Public+Sans:800|Noto+Sans:700|PT+Sans:700|Ubuntu:700|Bebas+Neue|Alatsi|Amatic+SC|Lato|Anton|Barlow+Condensed|Bebas+Neue|Indie+Flower|Varela+Round&display=swap');
 
 
 .transition {
@@ -56,7 +57,23 @@ a:hover {
 
 // landing page
 
+// .typeracer{
+//   color: #153df1;
+// }
 
+.menu {
+  color:black;
+  border: 0.2px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  // border-left: 8px solid #03365C;
+  padding: 50px 50px;
+  box-shadow: 1px 5px 10px rgba(0,0,0,0.2);
+}
+.landingpage{
+  font-family: 'montserrat';
+  font-weight: 900;
+  font-size: 35px;
+}
 .masthead {
   height: 100vh;
   min-height: 500px;
@@ -107,6 +124,7 @@ header{
 #category {
   flex-direction: column;
   margin-top: 20px;
+  justify-content: flex-end;
 }
 
 

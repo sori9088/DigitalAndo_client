@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.scss';
 import {Switch, Route} from 'react-router-dom'
 import Main from './components/Main'
+import Home from './components/Home'
 import Dashboard from './components/super/Dashboard'
 import Problem_Machine from './components/user/Problem_Machine'
 import Problem_Materials from './components/user/Problem_Materials'

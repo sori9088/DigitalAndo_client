@@ -1,8 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ReactTypingEffect from 'react-typing-effect';
-
+import {Link} from 'react-router-dom';
+import Machine_Line from './user/Machine_Line'
 
 export default function Main() {
+
+    const [detail, setDetail] = useState("")
+    const handleType = value => {
+        setDetail({
+           type: value         
+        })
+    }
+    console.log('detail', detail)
     return (
         <>
         <header className="masthead">
@@ -18,44 +27,43 @@ export default function Main() {
               />
               </span>
                 </div>
-                <div id="prototype">
-                    <div className="dropdown">
-                        <button onclick="myDropdownFunction()" className="dropbtn">
-                            Select your item
-                    <img src="./img/arrow-down-filled-triangle.png" alt="Machine icon" id="downTriangle" />
-                        </button>
-                        <div id="myDropdown" className="dropdown-content">
-                            <a href="#item1">Item 1</a>
-                            <a href="#item2">Item 2</a>
-                            <a href="#item3">Item 3</a>
-                            <a href="#item4">Item 4</a>
-                            <a href="#item5">Item 5</a>
-                        </div>
-                    </div>
+                
                     <div id="category">
-                        <div id="categoryGroup1">
-                            <button type="button" onclick="myFunction()" id="machineButton">
+                    <Machine_Line detail={detail} setDetail={setDetail} /> 
+                        <div id="categoryGroup1">                        
+                            <Link to="/detail/machine">
+                            <form value="machine" onClick={handleType} >
+                            <button type="submit" id="machineButton">
                                 <img src="https://image.flaticon.com/icons/svg/589/589100.svg" alt="Machine icon" id="machineImage" />
                                 <div id="categoryText">Machine</div>
                             </button>
-                            <button type="button" onclick="myFunction()" id="qualityButton">
+                            </form>
+                            </Link>
+
+                            <Link to="/detail/quality">
+                            <button type="button" onClick={(value)=> handleType(value)} id="qualityButton">
                                 <img src="https://image.flaticon.com/icons/svg/411/411728.svg" alt="Quality icon" id="qualityImage" />
                                 <div id="categoryText">Quality</div>
                             </button>
+                            </Link>
                         </div>
                         <div id="categoryGroup2">
-                            <button type="button" onclick="myFunction()" id="materialShortageButton">
+                        <Link to="/detail/materials">
+                            <button type="button" onClick={(value)=> handleType(value)} id="materialShortageButton">
                                 <img src="https://image.flaticon.com/icons/svg/898/898735.svg" alt="Material Shortage icon" id="materialShortageImage" />
                                 <div id="categoryText">Material Shortage</div>
                             </button>
-                            <button type="button" onclick="myFunction()" id="technicalIssueButton">
+                            </Link>
+                            <Link to="/detail/technical">
+                            <button type="button" onClick={(value)=> handleType(value)} id="technicalIssueButton">
                                 <img src="https://image.flaticon.com/icons/svg/1835/1835942.svg" alt="Technical Issue icon" id="technicalIssueImage" />
                                 <div id="categoryText">Technical Issue</div>
                             </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
-                </div>
+              
                 </header>
     </>
             )

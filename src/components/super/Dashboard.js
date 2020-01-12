@@ -12,7 +12,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
-        backgroundColor: "#b4c9fd",
+        backgroundColor: "#ffd796",
         color: theme.palette.common.black,
     },
     body: {
@@ -154,101 +154,148 @@ export default function Dashboard() {
 
 
 
+    function createData(id, Line, Detail1, Detail2, Problem, Status, Start, Remark) {
+        return { id, Line, Detail1, Detail2, Problem, Status, Start, Remark };
+    }
+
+    const reload = async () => {
+        info && info.map((item) => {
+            dataRows.push(createData(item.id, item.line_id, item.detail1, item.detail2, item.issue_type, item.status, item.start_date, item.remark));
+        });
+
+    }
+
+    console.log(dataRows)
+
+
+
+    const changetoDoing = async (e, id) => {
+        e.preventDefault();
+        const res = await fetch(process.env.REACT_APP_BURL + "/doing", {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({ "id": id })
+        });
+
+
+        if (res.ok) { // user is logged in
+            const data = await res.json()  // carefull you might be stuck here bcos of "await"
+            setInfo(data.issues)
+        } else {
+            alert('something is wrong')
+        }
+        console.log('hihi')
+    }
+
+    const finish = async (e, id) => {
+        e.preventDefault();
+        const res = await fetch(process.env.REACT_APP_BURL + "/done", {
+            method: "POST",
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({ "id": id })
+        });
+
+
+        if (res.ok) { // user is logged in
+            const data = await res.json()  // carefull you might be stuck here bcos of "await"
+            setInfo(data.issues)
+        } else {
+            alert('something is wrong')
+        }
+        console.log('hihi')
+    }
+
+
     return (
         <>
-        <header>
-            <div className="header d-flex justify-content-center">
+            <Navbar className="nav_bg" variant="dark" expand="lg">
+                <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto my-3">
+                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="#link">Link</Nav.Link>
+                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+            <div className="header nav_bg d-flex align-items-end">
+                <div className="mx-3"><h1>Issues</h1></div>
             </div>
-            <div className="body transition">
-            <div className="d-flex justify-content-center align-items-center">
-            <div className="my-3"><h2>Dashboard</h2></div>
-            <div className="ml-3"><a href={"/"}><i class="fas fa-home"></i></a></div>
-
-            </div>
-
-            <Container className="my-2 p-4 d-flex justify-content-center text-center">
+            <body>
+                <Container className="my-5 d-flex justify-content-center text-center">
                     <CardDeck>
-                        <Card className="shadow" style={{ width: "12rem" }}>
-                                <ToggleButton
-                                    value="check"
-                                    selected={toggle1}
-                                    onChange={(e) => {
-                                        setToggle1(!toggle1);
-                                        toggleWaiting(e);
-                                    }}
-                                >
-                                    Waiting
-                                </ToggleButton>
+                        <Card className="shadow" style={{width:"8rem"}}>
+                            <Card.Body><i class="far fa-circle"></i><br />Waiting</Card.Body>
                         </Card>
-                        <Card className="shadow" style={{ width: "8rem" }}>
-                                <ToggleButton
-                                    value="check1"
-                                    selected={toggle2}
-                                    onChange={(e) => {
-                                        setToggle2(!toggle2);
-                                        toggleDone(e);
-                                    }}
-                                >
-                                    Proceeding
-                                </ToggleButton>
-                        </Card>
+                    <Card className="shadow" style={{width:"8rem"}}>
+                        <Card.Body><i class="far fa-circle"></i>Proceeding</Card.Body>
+                    </Card>
                     </CardDeck>
-                </Container>
-                <Container className="dashboard_main">
-                    <div className="my-5">
-                        <TableContainer component={Paper}>
-                            <Table className={classes.table} aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <StyledTableCell>Line</StyledTableCell>
-                                        <StyledTableCell>Detail1</StyledTableCell>
-                                        <StyledTableCell>Detail2</StyledTableCell>
-                                        <StyledTableCell>Issue Type</StyledTableCell>
-                                        <StyledTableCell>Status</StyledTableCell>
-                                        <StyledTableCell>Start</StyledTableCell>
-                                        <StyledTableCell>Remark</StyledTableCell>
-                                        <StyledTableCell>Toggle</StyledTableCell>
+                    </Container>
+            <Container className="dashboard_main">
+                <div className="my-5">
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell>Line</StyledTableCell>
+                                    <StyledTableCell>Detail1</StyledTableCell>
+                                    <StyledTableCell>Detail2</StyledTableCell>
+                                    <StyledTableCell>Issue Type</StyledTableCell>
+                                    <StyledTableCell>Status</StyledTableCell>
+                                    <StyledTableCell>Start</StyledTableCell>
+                                    <StyledTableCell>Remark</StyledTableCell>
+                                    <StyledTableCell>Toggle</StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {dataRows.map(row => (
+                                    <TableRow key={row.Line}>
+                                        <StyledTableCell component="th" scope="row">
+                                            {row.Line}
+                                        </StyledTableCell>
+                                        <StyledTableCell >{row.Detail1}</StyledTableCell>
+                                        <StyledTableCell>{row.Detail2}</StyledTableCell>
+                                        <StyledTableCell>{row.Problem}</StyledTableCell>
+                                        <StyledTableCell>{row && row.Status === "false" ?
+                                            <>
+                                                <Badge variant="warning">Doing</Badge>
+                                            </>
+                                            :
+                                            <>
+                                                <Badge variant="danger">Not Yet</Badge>
+                                            </>
+                                        }</StyledTableCell>
+                                        <StyledTableCell>{row.Start}</StyledTableCell>
+                                        <StyledTableCell>{row.Remark}</StyledTableCell>
+                                        <StyledTableCell>{row && row.Status === "false" ?
+                                            <>
+                                                <Button variant="danger" onClick={(e) => finish(e, row.id)}>Done</Button>
+                                            </>
+                                            :
+                                            <>
+                                                <Button style={{ backgroundColor: "#3b84b9" }} onClick={(e) => changetoDoing(e, row.id)}>Check</Button>
+                                            </>
+                                        }</StyledTableCell>
                                     </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {dataRows.map(row => (
-                                        <TableRow key={row.Line}>
-                                            <StyledTableCell component="th" scope="row">
-                                                {row.Line}
-                                            </StyledTableCell>
-                                            <StyledTableCell >{row.Detail1}</StyledTableCell>
-                                            <StyledTableCell>{row.Detail2}</StyledTableCell>
-                                            <StyledTableCell>{row.Problem}</StyledTableCell>
-                                            <StyledTableCell>{row && row.Status === "doing" ?
-                                                <>
-                                                    <Badge variant="warning">Doing</Badge>
-                                                </>
-                                                :
-                                                <>
-                                                    <Badge variant="danger">Not Yet</Badge>
-                                                </>
-                                            }</StyledTableCell>
-                                            <StyledTableCell>{row.Start}</StyledTableCell>
-                                            <StyledTableCell>{row.Remark}</StyledTableCell>
-                                            <StyledTableCell>{row && row.Status === "doing" ?
-                                                <>
-                                                    <Button variant="danger" onClick={(e) => finish(e, row.id)}>Done</Button>
-                                                </>
-                                                :
-                                                <>
-                                                    <Button style={{ backgroundColor: "#3b84b9" }} onClick={(e) => changetoDoing(e, row.id)}>Check</Button>
-                                                </>
-                                            }</StyledTableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </div>
-                </Container>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </div>
-        </header>
-            
+            </Container>
+        </body>
         </>
     )
 }

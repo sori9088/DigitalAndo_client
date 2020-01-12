@@ -12,7 +12,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 
 const StyledTableCell = withStyles(theme => ({
     head: {
-        backgroundColor: "#ffd796",
+        backgroundColor: "#b4c9fd",
         color: theme.palette.common.black,
     },
     body: {
@@ -156,28 +156,17 @@ export default function Dashboard() {
 
     return (
         <>
-            <Navbar className="nav_bg" variant="dark" expand="lg">
-                <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto my-3">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-            <div className="header nav_bg d-flex align-items-end">
-                <div className="mx-3"><h1>Issues</h1></div>
+        <header>
+            <div className="header d-flex justify-content-center">
             </div>
-            <body>
-                <Container className="my-5 d-flex justify-content-center text-center">
+            <div className="body transition">
+            <div className="d-flex justify-content-center align-items-center">
+            <div className="my-3"><h2>Dashboard</h2></div>
+            <div className="ml-3"><a href={"/"}><i class="fas fa-home"></i></a></div>
+
+            </div>
+
+            <Container className="my-2 p-4 d-flex justify-content-center text-center">
                     <CardDeck>
                         <Card className="shadow" style={{ width: "12rem" }}>
                                 <ToggleButton
@@ -257,7 +246,9 @@ export default function Dashboard() {
                         </TableContainer>
                     </div>
                 </Container>
-            </body>
+                </div>
+        </header>
+            
         </>
     )
 }

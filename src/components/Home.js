@@ -29,7 +29,8 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
+    height: '98vh',
+    width: '99vw'
   },
   image: {
     backgroundImage: 'url(https://picserio.com/data/out/479/digital-hd-wallpapers_6799535.jpg)',
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '98%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {

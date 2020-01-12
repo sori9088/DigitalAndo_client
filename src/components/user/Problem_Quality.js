@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,32 +22,88 @@ const useStyles = makeStyles(theme => ({
 
 export default function Problem_Quality() {
     const classes = useStyles();
-    const [line, setLine] = React.useState('');
+    const [detail, setDetail] = useState(null)
     const [open, setOpen] = React.useState(false);
-    const handleChange = event => {
-        setLine(event.target.value);
-      };
+    const [line, setLine] = React.useState('')
+    const history = useHistory();
+
     const handleClose = () => {
     setOpen(false);
     };
     const handleOpen = () => {
     setOpen(true);
     };
+    const handleLine = e => {
+       setLine(e.target.value)
+       setDetail({
+        ...detail,
+        line_id: e.target.value
+    })
+    }
+    const handleDetail1 = value => {
+        setDetail({
+            ...detail,
+            detail1: value 
+        })
+    }
+    const handleDetail2 = value => {
+        setDetail({
+            ...detail,
+            detail2: value
+        })
+    }
+    const handleChange = e => {
+        setDetail({
+            ...detail,
+            [e.target.name]: e.target.value
+        })
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const body = { ...detail } 
+        const res = await fetch(("http://127.0.0.1:5000/send_issue"), {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
+        });
+        if (res.ok) {
+            const data = await res.json()
+            if (data.success == true) {
+                alert('successfully sent!')
+                history.push('/')
+            }
+        }
+    }
 
     //data detail1
     const detail1 = [
-        { title: 'grape', year: 1994 },
-        { title: 'apple', year: 1994 },
+        { title: 'GOLETTO'},
+        { title: 'NEMEZIZ 19.3 '},
+        { title: 'NEMEZIZ 19.4'},
+        { title: 'GRAND COURT C'},
+        { title: 'X GHOSTED.4'},
+        { title: 'COURTMASTER'},
+        { title: 'NEMEZIZ MESSI 19.4'},
+        { title: 'PREDATOR 20.4'},
       ];
     const detail2 = [
-        { title: 'Detail', year: 1994 } //data detail2
+        { title: 'Upper Material'},
+        { title: 'Soles bonding'},
+        { title: 'Upper Stitching'},
+        { title: 'Lining'},
+        { title: 'Unsatisfactory finish'},
+         //data detail2
       ];
-
+    console.log('data', detail)
+    console.log('line', line)
     return (
       <Container className="mt-5">
        <h1> Quality problem</h1>
        <br/>
-       <div>
+
+      
        <h5> Select Machine line </h5>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">Machine line</InputLabel>
@@ -55,9 +112,10 @@ export default function Problem_Quality() {
           id="demo-controlled-open-select"
           open={open}
           onClose={handleClose}
-          onOpen={handleOpen}
           value={line}
-          onChange={handleChange}
+          onOpen={handleOpen}
+          onChange={handleLine}
+          name="line_id"
         >
           <MenuItem value="A1">A1</MenuItem>
           <MenuItem value="A2">A2</MenuItem>
@@ -66,34 +124,38 @@ export default function Problem_Quality() {
           <MenuItem value="A5">A5</MenuItem>
         </Select>
       </FormControl>
-    </div>
     <br/>
-       <h5> Detail 1 </h5>
+       <h5> Model </h5>
       <Autocomplete
+        onChange={(event, value) => handleDetail1(value)}
         id="combo-box-demo"
         options={detail1}
         getOptionLabel={option => option.title}
         style={{ width: 300 }}
         renderInput={params => (
-          <TextField {...params} label="Detail 1" variant="outlined" fullWidth />
+          <TextField {...params} label="Detail 1" variant="outlined" 
+          fullWidth />
         )}
       />
     <br/>
-    <h5> Detail 2 </h5>
+    <h5> Quality Issues </h5>
       <Autocomplete
+        onChange={(event, value) => handleDetail2(value)}
         id="combo-box-demo"
         options={detail2}
         getOptionLabel={option => option.title}
         style={{ width: 300 }}
         renderInput={params => (
-          <TextField {...params} label="Detail 2" variant="outlined" fullWidth />
+          <TextField {...params} label="Detail 2" variant="outlined" name="detail2" 
+           fullWidth />
         )}
       />
     <br/>
-    <h5> Comment </h5>
-    <textarea style={{width:"100%", height:"200px"}}> </textarea> <br/>
-    <Button variant="info">Submit</Button>
-      </Container>
+    <h5> Remark </h5>
+    <textarea onChange={(e)=> handleChange(e)} style={{width:"100%", height:"200px"}} name="remark"> </textarea> <br/>
+    <Button onClick={handleSubmit} variant="info">Submit</Button>
+
+    </Container>
     );
   }
   

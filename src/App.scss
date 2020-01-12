@@ -1,4 +1,4 @@
-$blue: #3b84b9;
+$blue: #014265;
 $yellow: #ffd796;
 $font: 'Catamaran', serif;
 
@@ -7,12 +7,35 @@ $font: 'Catamaran', serif;
 @import url('https://fonts.googleapis.com/css?family=Crete+Round|Catamaran|Noto+Sans+JP&display=swap');
 
 
-body {
+.transition {
+  -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+
+
+.body {
+
   font-family: $font !important;
+  background-color: rgb(255, 255, 255);
+  width: 70%;
+  margin: auto;
+  min-height: 70vh;
+  border-radius: 0.4rem;
+  -webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+    transition:width 2s, height 2s, background-color 2s, transform 2s;
 }
-.dashboard_main{
-  background-color: white;
+
+a{
+  color:$blue !important;
 }
+
+a:hover {
+  color:$blue !important;
+}
+
 
 .nav_bg {
   background-color: $blue;
@@ -42,6 +65,15 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+header{
+  height: 100vh;
+  background-image: url(../src/img/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 
 
 

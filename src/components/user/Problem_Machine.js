@@ -2,44 +2,13 @@ import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {Button, Container} from 'react-bootstrap'
+import Machine_Line from './Machine_Line'
 
-const useStyles = makeStyles(theme => ({
-    button: {
-      display: 'block',
-      marginTop: theme.spacing(2),
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-  }));
 
 export default function Problem_Machine() {
-    const classes = useStyles();
-    const [detail, setDetail] = useState(null)
-    const [open, setOpen] = React.useState(false);
-    const [line, setLine] = React.useState('')
+    const [detail, setDetail] = useState({type:"Machine"})
     const history = useHistory();
-
-    const handleClose = () => {
-    setOpen(false);
-    };
-    const handleOpen = () => {
-    setOpen(true);
-    };
-    const handleLine = e => {
-       setLine(e.target.value)
-       setDetail({
-        ...detail,
-        line_id: e.target.value
-    })
-    }
     const handleDetail1 = value => {
         setDetail({
             ...detail,
@@ -72,7 +41,7 @@ export default function Problem_Machine() {
             const data = await res.json()
             if (data.success == true) {
                 alert('successfully sent!')
-                history.push('/')
+                history.push('/dashboard')
             }
         }
     }
@@ -140,32 +109,12 @@ export default function Problem_Machine() {
         { title: 'Repair'}
          //data detail2
       ];
-    console.log('data', detail)
-    console.log('line', line)
+    console.log('detail', detail)
     return (
       <Container className="mt-5">
        <h1> Machine Issue</h1>
        <br/>
-       <h5> Select Machine line </h5>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label">Machine line</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          value={line}
-          onOpen={handleOpen}
-          onChange={handleLine}
-          name="line_id"
-        >
-          <MenuItem value="A1">A1</MenuItem>
-          <MenuItem value="A2">A2</MenuItem>
-          <MenuItem value="A3">A3</MenuItem>
-          <MenuItem value="A4">A4</MenuItem>
-          <MenuItem value="A5">A5</MenuItem>
-        </Select>
-      </FormControl>
+       <Machine_Line setDetail={setDetail} detail={detail}/>
       <br/>
     <br/>
        <h5> Machine Code </h5>
@@ -195,8 +144,8 @@ export default function Problem_Machine() {
       />
     <br/>
     <h5> Let us know more about issue detail </h5>
-    <textarea onChange={(e)=> handleChange(e)} style={{width:"100%", height:"200px"}} name="remark"> </textarea> <br/>
-    <Button onClick={handleSubmit} variant="info">Submit</Button>
+    <textarea onChange={(e)=> handleChange(e)} style={{width:"100%", height:"150px"}} name="remark"> </textarea> <br/>
+    <Button onClick={handleSubmit} variant="info">Report Issue</Button>
 
     </Container>
     );

@@ -4,7 +4,8 @@ $font: 'Catamaran', serif;
 
 
 
-@import url('https://fonts.googleapis.com/css?family=Crete+Round|Catamaran|Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Crete+Round|Catamaran|Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Delius+Unicase:700|Mali:700|Public+Sans:800|Noto+Sans:700|PT+Sans:700|Ubuntu:700|Bebas+Neue|Alatsi|Amatic+SC|Lato|Anton|Barlow+Condensed|Bebas+Neue|Indie+Flower|Varela+Round&display=swap');
 
 
 body {
@@ -28,4 +29,213 @@ body {
   font-family: $font !important;
   font-size : 1rem !important;
 
+}
+
+
+// landing page
+
+// .typeracer{
+//   color: #153df1;
+// }
+
+.menu {
+  color:black;
+  border: 0.2px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  // border-left: 8px solid #03365C;
+  padding: 50px 50px;
+  box-shadow: 1px 5px 10px rgba(0,0,0,0.2);
+}
+.landingpage{
+  font-family: 'montserrat';
+  font-weight: 900;
+  font-size: 35px;
+}
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url(../src/img/background.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Racing+Sans+One&display=swap');
+#titleWrapper {
+  font-size : 4rem !important;
+  font-family: 'Racing Sans One', cursive;
+  flex: 1;
+}
+
+// #prototype {
+//   flex: 3.75;
+//   flex-direction: column;
+//   justify-content: center;
+//   padding-right: 20px;
+// }
+
+#categoryGroup1 {
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#categoryGroup2 {
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+#category {
+  flex-direction: column;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+
+#machineButton {
+  width: 150px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: white;
+  outline: none;
+  border-width: 1px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+#machineButton:hover {
+  background-color: #f2f2f2;
+}
+
+#machineImage {
+  width: 100px;
+  height: 100px;
+}
+
+#qualityButton {
+  width: 150px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: white;
+  outline: none;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+#qualityButton:hover {
+  background-color: #f2f2f2;
+}
+
+#qualityImage {
+  width: 100px;
+  height: 100px;
+}
+
+#materialShortageButton {
+  width: 150px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: white;
+  outline: none;
+  border-width: 1px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+#materialShortageButton:hover {
+  background-color: #f2f2f2;
+}
+
+#materialShortageImage {
+  width: 100px;
+  height: 100px;
+}
+
+#technicalIssueButton {
+  width: 150px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: white;
+  outline: none;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+#technicalIssueButton:hover {
+  background-color: #f2f2f2;
+}
+
+#technicalIssueImage {
+  width: 100px;
+  height: 100px;
+}
+
+#categoryText {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 30px;
+}
+
+.dropbtn {
+background-color: #3498DB;
+color: white;
+padding: 16px;
+font-size: 16px;
+border: none;
+cursor: pointer;
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+background-color: #2980B9;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+display: flex;
+justify-content: flex-end;
+margin-right: 80px;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f1f1f1;
+min-width: 160px;
+overflow: auto;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+.dropdown-content a {
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+#downTriangle {
+  margin-left: 5px;
+  width: 10px;
+  height: 10px;
+}
+
+
+// dashboard
+
+.card {
+  min-width: 5rem !important;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.125) !important;
+  border-radius: .25rem;
 }

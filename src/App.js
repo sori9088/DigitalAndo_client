@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.scss';
 import {Switch, Route} from 'react-router-dom'
 import Main from './components/Main'
+import Home from './components/Home'
 import Dashboard from './components/super/Dashboard'
 import Problem_Machine from './components/user/Problem_Machine'
 import Problem_Materials from './components/user/Problem_Materials'
@@ -13,6 +14,7 @@ function App() {
     <>
     <Switch>
         <Route exact path='/' render={() => <Main />} />
+        <Route exact path='/home' render={() => <Home />} />
         <Route exact path='/dashboard' render={() => <Dashboard />} />
         <Route exact path='/detail/machine' render={() => <Problem_Machine />} />
         <Route exact path='/detail/materials' render={() => <Problem_Materials />} />

@@ -30,7 +30,7 @@ export default function Problem_Machine() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const body = { ...detail } 
-        const res = await fetch(("http://127.0.0.1:5000/send_issue"), {
+        const res = await fetch(process.env.REACT_APP_BURL+"/send_issue", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

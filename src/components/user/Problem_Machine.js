@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import {Button, Container} from 'react-bootstrap'
+import {Button, Container, Row, Col} from 'react-bootstrap'
 import Machine_Line from './Machine_Line'
 
 
@@ -111,8 +111,9 @@ export default function Problem_Machine() {
       ];
     console.log('detail', detail)
     return (
-      <Container className="mt-5">
-       <h1> Machine Issue</h1>
+      <div className="bg">
+       <Container className="p-4" style={{backgroundColor:'white', borderRadius:'10px'}}>
+         <h1 className="mt-3"> Machine Issue</h1>
        <br/>
        <Machine_Line setDetail={setDetail} detail={detail}/>
       <br/>
@@ -146,8 +147,8 @@ export default function Problem_Machine() {
     <h5> Let us know more about issue detail </h5>
     <textarea onChange={(e)=> handleChange(e)} style={{width:"100%", height:"150px"}} name="remark"> </textarea> <br/>
     <Button onClick={handleSubmit} variant="info">Report Issue</Button>
-
     </Container>
+    </div>
     );
   }
   

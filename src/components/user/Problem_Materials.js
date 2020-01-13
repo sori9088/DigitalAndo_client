@@ -64,8 +64,9 @@ export default function Problem_Materials() {
     console.log('data', detail)
 
     return (
-      <Container className="mt-5">
-       <h1> Material Shortage Issue</h1>
+      <div className="bg">
+       <Container className="p-4" style={{backgroundColor:'white', borderRadius:'10px'}}>
+       <h1  className="mt-3"> Material Shortage Issue</h1>
        <br/>
        <Machine_Line setDetail={setDetail} detail={detail}/>
       <br/>
@@ -99,8 +100,8 @@ export default function Problem_Materials() {
     <h5> Let us know more about issue detail </h5>
     <textarea onChange={(e)=> handleChange(e)} style={{width:"100%", height:"150px"}} name="remark"> </textarea> <br/>
     <Button onClick={handleSubmit} variant="info">Report Issue</Button>
-
-    </Container>
+        </Container>
+        </div>
     );
   }
   

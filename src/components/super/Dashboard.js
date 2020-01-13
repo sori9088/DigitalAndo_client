@@ -10,6 +10,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { useHistory } from 'react-router-dom';
+import moment from 'moment'
+
 
 
 const StyledTableCell = withStyles(theme => ({
@@ -47,14 +49,12 @@ export default function Dashboard() {
     }, [])
 
 
+
+
     useEffect(() => {
         reload();
     }, [filteredInfo])
 
-
-    useEffect(() => {
-        reload();
-    }, [info])
 
 
 
@@ -77,13 +77,15 @@ export default function Dashboard() {
         return { id, Line, Detail1, Detail2, Problem, Status, Start, Remark };
     }
 
-    const reload = async () => {
-        const rows = [];
+    const reload = () => {
+        let rows = [];
+        console.log(rows, "before push")
         filteredInfo && filteredInfo.map((item) => {
             rows.push(createData(item.id, item.line_id, item.detail1, item.detail2, item.issue_type, item.status, item.start_date, item.remark));
         });
+        console.log(rows, "after push")
         setDataRows(rows)
-
+        rows = [];
     }
 
     console.log(dataRows)
@@ -108,7 +110,6 @@ export default function Dashboard() {
         } else {
             alert('something is wrong')
         }
-        console.log('hihi')
     }
 
     const finish = async (e, id) => {
@@ -129,7 +130,6 @@ export default function Dashboard() {
         } else {
             alert('something is wrong')
         }
-        console.log('hihi')
     }
 
 
@@ -185,7 +185,7 @@ export default function Dashboard() {
                                     Waiting
                                 </ToggleButton>
                         </Card>
-                        <Card className="shadow" style={{ width: "8rem" }}>
+                        <Card className="shadow" style={{ width: "12rem" }}>
                                 <ToggleButton
                                     value="check1"
                                     selected={toggle2}
@@ -233,7 +233,7 @@ export default function Dashboard() {
                                                     <Badge variant="danger">Waiting</Badge>
                                                 </>
                                             }</StyledTableCell>
-                                            <StyledTableCell>{row.Start}</StyledTableCell>
+                                            <StyledTableCell>{moment(row.Start).format('lll')}</StyledTableCell>
                                             <StyledTableCell>{row.Remark}</StyledTableCell>
                                             <StyledTableCell>{row && row.Status === "doing" ?
                                                 <>

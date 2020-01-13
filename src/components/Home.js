@@ -108,7 +108,7 @@ export default function Home() {
                             </div> 
                             </Link>
 
-                            <Link to="/detail/technical ">
+                            <Link to="/detail/technical">
                             <div className="technical mr-3 menu text-center">                           
                              Technical <br/> <br/>  
                              <img width="70" src="https://image.flaticon.com/icons/svg/1086/1086507.svg"/>                          
